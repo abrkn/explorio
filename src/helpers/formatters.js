@@ -25,10 +25,14 @@ exports.date = function(date) {
     return moment(date).format('YYYY-MM-DD HH:mm:ss')
 }
 
-exports.isAccountId = function(value) {
+exports.isStellarAccountId = function(value) {
     return !!value.match(/^g[a-zA-Z0-9]{33}$/)
 }
 
 exports.isTransactionHash = function(value) {
     return !!value.match(/^[A-Z0-9]{64}$/)
+}
+
+exports.isRippleAccountId = function(value) {
+    return !!value.match(/^r[a-zA-Z0-9]{33}$/)
 }
