@@ -1,6 +1,6 @@
 {
   "name": "explorr",
-  "description": "Explorer for Ripple compatible networks",
+  "description": "Ledger explorer for Ripple compatible networks",
   "version": "0.0.1",
   "dependencies": {
     "webpack": "^1.3.3-beta1",
