@@ -1,0 +1,27 @@
+{
+  "name": "explorr",
+  "description": "Explorer for Ripple compatible networks",
+  "version": "0.0.1",
+  "dependencies": {
+    "webpack": "^1.3.3-beta1",
+    "react": "^0.11.1",
+    "react-router": "^0.5.2",
+    "stylus": "^0.47.3",
+    "style-loader": "^0.6.4",
+    "jsx-loader": "^0.11.0",
+    "css-loader": "^0.7.0",
+    "autoprefixer-loader": "^0.1.1",
+    "stylus-loader": "^0.4.0",
+    "html-loader": "^0.2.2",
+    "gulp": "^3.8.7",
+    "express": "^4.8.2",
+    "gulp-webpack": "^0.3.0",
+    "gulp-util": "^3.0.0",
+    "stellar-lib": "^0.9.2",
+    "num": "git://github.com/abrkn/node-num.git#v0.2.9",
+    "lodash": "^2.4.1",
+    "moment": "^2.8.1",
+    "superagent": "^0.18.2",
+    "json-loader": "^0.5.1"
+  }
+}

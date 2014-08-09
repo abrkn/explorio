@@ -1,0 +1,4 @@
+{
+    "defaultFederationDomain": "stellar.org",
+    "reverseFederation": "https://api.stellar.org/reverseFederation?destination_address=%s&domain=%s&type=reverse_federation"
+}
