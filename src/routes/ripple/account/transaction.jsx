@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react/addons')
-var TransactionLink = require('../../../partials/stellar/transaction-link')
-var TransactionDescription = require('../../../partials/stellar/transaction-description')
+var TransactionLink = require('../../../partials/ripple/transaction-link')
+var TransactionDescription = require('../../../partials/ripple/transaction-description')
 var formatters = require('../../../helpers/formatters')
 var constants = require('../../../helpers/constants')
 

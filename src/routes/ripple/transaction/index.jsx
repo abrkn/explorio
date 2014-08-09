@@ -20,7 +20,6 @@ var Transaction = React.createClass({
   fetch: function() {
     var remote = remotes[constants.networks.RIPPLE]
     remote.requestTransaction(this.props.params.hash, function(err, res) {
-      console.log('???', remote, err, res)
       if (err) throw err
       this.setState({
         tx: res

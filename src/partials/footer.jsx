@@ -9,7 +9,8 @@ var Footer = React.createClass({
       <div className="row">
         <div className="col-lg-8">
           <a href="https://github.com/abrkn/explorio">Github</a> ·{' '}
-          <a href="https://justcoin.com/stellar">Buy Stellar</a>
+          <a href="https://justcoin.com/stellar">Buy Stellar</a> ·{' '}
+          <a href="https://justcoin.com/ripple">Buy Ripple</a>
         </div>
 
         <div className="col-lg-4">

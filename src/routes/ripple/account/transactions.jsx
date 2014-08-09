@@ -16,6 +16,7 @@ var Transactions = React.createClass({
     fetch: function() {
         var remote = remotes[constants.networks.RIPPLE]
         var opts = {
+            ledger_index_min: -1,
             account: this.props.account,
             descending: true
         }
