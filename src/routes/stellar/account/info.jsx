@@ -31,7 +31,7 @@ var Info = React.createClass({
             <tbody>
                 <tr>
                     <th>STR Balance</th>
-                    <td>{formatters.formatDrops(data.Balance, window.network)}</td>
+                    <td>{formatters.formatDrops(data.Balance, constants.networks.STELLAR)}</td>
                 </tr>
             </tbody>
         </table>
