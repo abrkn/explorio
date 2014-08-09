@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
 var React = require('react/addons')
-var remotes = require('../../helpers/remotes')
-var transactionsHelper = require('../../helpers/transactions')
+var remotes = require('../../../helpers/remotes')
+var constants = require('../../../helpers/constants')
+var transactionsHelper = require('../../../helpers/transactions')
 var AccountTransaction = require('./transaction')
 
 var Transactions = React.createClass({
@@ -13,7 +14,7 @@ var Transactions = React.createClass({
     },
 
     fetch: function() {
-        var remote = remotes[window.network]
+        var remote = remotes[constants.networks.STELLAR]
         var opts = {
             account: this.props.account,
             descending: true

@@ -6,9 +6,16 @@ var Footer = React.createClass({
     return <div className="container">
       <hr />
 
-      <footer>
-        <p>&copy; Explor.io 2014</p>
-      </footer>
+      <div className="row">
+        <div className="col-lg-8">
+          <a href="https://github.com/abrkn/explorio">Github</a> ·{' '}
+          <a href="https://justcoin.com/stellar">Buy Stellar</a>
+        </div>
+
+        <div className="col-lg-4">
+          <p className="muted pull-right">© 2014 Explor.io</p>
+        </div>
+      </div>
     </div>
   }
 })

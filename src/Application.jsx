@@ -9,7 +9,6 @@ var Footer = require('./partials/footer')
 var constants = require('./helpers/constants')
 
 window.Remotes = require('./helpers/remotes')
-window.network = constants.networks.STELLAR
 
 // Expose React to React debugger
 window.React = React
@@ -27,15 +26,19 @@ var App = React.createClass({
 });
 
 var HomeRoute = require('./routes/home')
-var AccountRoute = require('./routes/account')
-var TransactionRoute = require('./routes/transaction')
+var StellarAccountRoute = require('./routes/stellar/account')
+var StellarTransactionRoute = require('./routes/stellar/transaction')
+var RippleAccountRoute = require('./routes/ripple/account')
+var RippleTransactionRoute = require('./routes/ripple/transaction')
 
 var routes = (
   <Routes>
     <Route handler={App}>
       <Route name="home" path="/" handler={HomeRoute} />
-      <Route name="account" path="/accounts/:account" handler={AccountRoute} />
-      <Route name="transaction" path="/transactions/:hash" handler={TransactionRoute} />
+      <Route name="stellarAccount" path="/stellar/accounts/:account" handler={StellarAccountRoute} />
+      <Route name="stellarTransaction" path="/stellar/transactions/:hash" handler={StellarTransactionRoute} />
+      <Route name="rippleAccount" path="/ripple/accounts/:account" handler={RippleAccountRoute} />
+      <Route name="rippleTransaction" path="/ripple/transactions/:hash" handler={RippleTransactionRoute} />
     </Route>
   </Routes>
 );

@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react/addons')
-var CopyButton = require('./copy-button')
-var federation = require('../helpers/federation')
+var CopyButton = require('../copy-button')
+var federation = require('../../helpers/stellar-federation')
 var LOOKUP_DELAY = 50
 
 var AccountLink = React.createClass({
@@ -40,7 +40,7 @@ var AccountLink = React.createClass({
 
     render: function() {
         return <span>
-            <a href={'#/accounts/' + this.props.id} title={this.props.id} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+            <a href={'#/stellar/accounts/' + this.props.id} title={this.props.id} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                 {this.state.name ?
                     this.state.name :
                     this.props.id.substr(0, 7)

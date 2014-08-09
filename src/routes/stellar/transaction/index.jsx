@@ -1,14 +1,14 @@
 /** @jsx React.DOM */
 var React = require('react/addons')
-var remotes = require('../../helpers/remotes')
 var num = require('num')
-var numbers = require('../../helpers/numbers')
-var constants = require('../../helpers/constants')
-var formatters = require('../../helpers/formatters')
-var transactionsHelper = require('../../helpers/transactions')
-var TransactionDescription = require('../../partials/transaction-description')
-var CopyButton = require('../../partials/copy-button')
-var AccountLink = require('../../partials/account-link')
+var remotes = require('../../../helpers/remotes')
+var numbers = require('../../../helpers/numbers')
+var constants = require('../../../helpers/constants')
+var formatters = require('../../../helpers/formatters')
+var transactionsHelper = require('../../../helpers/transactions')
+var TransactionDescription = require('../../../partials/stellar/transaction-description')
+var CopyButton = require('../../../partials/copy-button')
+var AccountLink = require('../../../partials/stellar/account-link')
 
 var Transaction = React.createClass({
   getInitialState: function() {
@@ -18,7 +18,7 @@ var Transaction = React.createClass({
   },
 
   fetch: function() {
-    var remote = remotes[window.network]
+    var remote = remotes[constants.networks.STELLAR]
     remote.requestTransaction(this.props.params.hash, function(err, res) {
       if (err) throw err
       this.setState({

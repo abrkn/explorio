@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react/addons')
-var formatters = require('../helpers/formatters')
+var formatters = require('../../helpers/formatters')
+var constants = require('../../helpers/constants')
 var AccountLink = require('./account-link')
 
 var TransactionDescription = React.createClass({
@@ -14,7 +15,7 @@ var TransactionDescription = React.createClass({
         var other = send ? tx.Destination : tx.Account
           inner = <span>
             {send ? 'Sent' : 'Received'}{' '}
-            {formatters.formatAmount(tx.Amount, window.network)}{' '}
+            {formatters.formatAmount(tx.Amount, constants.networks.STELLAR)}{' '}
             {send ? 'to' : ' from'}{' '}
             <AccountLink id={other} />
             {tx.DestinationTag ? ':' + tx.DestinationTag : ''}

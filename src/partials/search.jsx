@@ -19,12 +19,12 @@ var Search = React.createClass({
     this.setState({ invalid: false })
 
     if (formatters.isAccountId(this.state.value)) {
-      window.location.hash = '#/accounts/' + this.state.value
+      window.location.hash = '#/stellar/accounts/' + this.state.value
       return
     }
 
     if (formatters.isTransactionHash(this.state.value)) {
-      window.location.hash = '#/transactions/' + this.state.value
+      window.location.hash = '#/stellar/transactions/' + this.state.value
       return
     }
 

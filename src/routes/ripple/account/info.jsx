@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
 var React = require('react/addons')
-var remotes = require('../../helpers/remotes')
-var formatters = require('../../helpers/formatters')
+var remotes = require('../../../helpers/remotes')
+var formatters = require('../../../helpers/formatters')
+var constants = require('../../../helpers/constants')
 
 var Info = React.createClass({
     getInitialState: function() {
@@ -11,7 +12,7 @@ var Info = React.createClass({
     },
 
     componentWillMount: function() {
-        var remote = remotes[window.network]
+        var remote = remotes[constants.networks.RIPPLE]
 
         remote.requestAccountInfo(this.props.account, function(err, info) {
             if (err) throw err
@@ -30,14 +31,10 @@ var Info = React.createClass({
             <tbody>
                 <tr>
                     <th>XRP Balance</th>
-                    <td>{formatters.formatDrops(data.Balance, window.network)}</td>
+                    <td>{formatters.formatDrops(data.Balance, constants.networks.RIPPLE)}</td>
                 </tr>
             </tbody>
         </table>
-
-        return <div className="account-info">
-            ...
-        </div>
     }
 })
 
