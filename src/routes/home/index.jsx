@@ -3,19 +3,31 @@ var React = require('react/addons')
 
 var Home = React.createClass({
   render: function() {
-    return <div className="container">
+    return <div className="home-page container">
       <h1>Welcome to Explorio!</h1>
 
       <p>
         Explorio lets you browse the ledger of Ripple and Stellar.
       </p>
 
-      <p>Not sure where to start? Try one of these accounts:</p>
-
-      <ul>
-        <li><a href="#/stellar/accounts/gnhPFpbYXcYGMkGxfWdQGFfuKEdJoEThVo">Justcoin (Stellar)</a></li>
-        <li><a href="#/ripple/accounts/rJHygWcTLVpSXkowott6kzgZU6viQSVYM1">Justcoin (Ripple)</a></li>
-      </ul>
+      <div className="row">
+        <div className="col-xs-2">
+          <a href="#/ripple" className="thumbnail">
+            <img src="https://s3-eu-west-1.amazonaws.com/explor.io/images/ripple.png" alt="Ripple" />
+            <div className="caption">
+              <h3>Ripple</h3>
+            </div>
+          </a>
+        </div>
+        <div className="col-xs-2">
+          <a href="#/stellar" className="thumbnail">
+            <img src="https://s3-eu-west-1.amazonaws.com/explor.io/images/stellar.png" alt="Stellar" />
+            <div className="caption">
+              <h3>Stellar</h3>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   }
 })
