@@ -77,7 +77,6 @@ var Search = React.createClass({
     return <form className="navbar-form navbar-right nav-right" role="search" onSubmit={this.onSubmit}>
       <div className={cx({ 'form-group': true, 'has-error': this.state.invalid })}>
         <input type="text" className="form-control" valueLink={this.linkState('value')} />
-      }
       </div>
       <DropdownButton value={this.state.network} onChange={this.onNetworkChange} />
     </form>
