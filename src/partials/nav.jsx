@@ -4,7 +4,7 @@ var Search = require('./search')
 
 var Nav = React.createClass({
   render: function() {
-    return <div className="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    return <div className="navbar navbar-default navbar-fixed-top" role="navigation">
       <div className="container">
         <div className="navbar-header">
           <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
