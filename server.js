@@ -9,6 +9,8 @@ app.set('trust proxy', true)
 app.set('case sensitive routing', true)
 app.set('strict routing', true)
 
+app.use(compression())
+
 app.use(express.static(path.resolve('build')))
 
 var port = process.env.PORT || 8080
