@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
-var React = require('react/addons');
-var Router = require('react-router');
-var Route = Router.Route;
-var Routes = Router.Routes;
-var Link = Router.Link;
+var React = require('react/addons')
+var Router = require('react-router')
+var Route = Router.Route
+var Routes = Router.Routes
+var Link = Router.Link
 var Nav = require('./partials/nav')
 var Footer = require('./partials/footer')
 var constants = require('./helpers/constants')
@@ -21,9 +21,9 @@ var App = React.createClass({
         {this.props.activeRouteHandler()}
         {<Footer />}
       </div>
-    );
+    )
   }
-});
+})
 
 var HomeRoute = require('./routes/home')
 var StellarAccountRoute = require('./routes/stellar/account')
@@ -41,6 +41,6 @@ var routes = (
       <Route name="rippleTransaction" path="/ripple/transactions/:hash" handler={RippleTransactionRoute} />
     </Route>
   </Routes>
-);
+)
 
-React.renderComponent(routes, document.body);
+React.renderComponent(routes, document.body)

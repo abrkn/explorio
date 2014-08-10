@@ -5,37 +5,37 @@ var formatters = require('../../../helpers/formatters')
 var constants = require('../../../helpers/constants')
 
 var Info = React.createClass({
-    getInitialState: function() {
-        return {
-            info: null
-        }
-    },
-
-    componentWillMount: function() {
-        var remote = remotes[constants.networks.RIPPLE]
-
-        remote.requestAccountInfo(this.props.account, function(err, info) {
-            if (err) throw err
-            this.setState({ info: info })
-        }.bind(this))
-    },
-
-    render: function() {
-        if (!this.state.info) {
-            return <p>Loading...</p>
-        }
-
-        var data = this.state.info.account_data
-
-        return <table className="table table-bordered table-striped">
-            <tbody>
-                <tr>
-                    <th>XRP Balance</th>
-                    <td>{formatters.formatDrops(data.Balance, constants.networks.RIPPLE)}</td>
-                </tr>
-            </tbody>
-        </table>
+  getInitialState: function() {
+    return {
+      info: null
     }
+  },
+
+  componentWillMount: function() {
+    var remote = remotes[constants.networks.RIPPLE]
+
+    remote.requestAccountInfo(this.props.account, function(err, info) {
+      if (err) throw err
+        this.setState({ info: info })
+    }.bind(this))
+  },
+
+  render: function() {
+    if (!this.state.info) {
+      return <p>Loading...</p>
+    }
+
+    var data = this.state.info.account_data
+
+    return <table className="table table-bordered table-striped">
+      <tbody>
+        <tr>
+          <th>XRP Balance</th>
+          <td>{formatters.formatDrops(data.Balance, constants.networks.RIPPLE)}</td>
+        </tr>
+      </tbody>
+    </table>
+  }
 })
 
 module.exports = Info

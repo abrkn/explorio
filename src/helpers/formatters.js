@@ -4,35 +4,35 @@ var numbers = require('./numbers')
 var moment = require('moment')
 
 exports.formatAmount = function(amount, network) {
-    if (typeof amount == 'string') {
-        return exports.formatDrops(amount, network)
-    }
+  if (typeof amount == 'string') {
+    return exports.formatDrops(amount, network)
+  }
 
-    return numbers.format(amount.value, { currency: amount.currency + ':' + amount.issuer.substr(0, 4) })
+  return numbers.format(amount.value, { currency: amount.currency + ':' + amount.issuer.substr(0, 4) })
 }
 
 exports.formatDrops = function(n, network) {
-    var currency = constants.nativeCurrency[network]
-    var precision = constants.precision[currency]
-    return numbers.format(num(n, precision), { currency: currency })
+  var currency = constants.nativeCurrency[network]
+  var precision = constants.precision[currency]
+  return numbers.format(num(n, precision), { currency: currency })
 }
 
 exports.networkEpochToDate = function(network, epoch) {
-    return new Date((constants.epochs[network] + epoch) * 1e3)
+  return new Date((constants.epochs[network] + epoch) * 1e3)
 }
 
 exports.date = function(date) {
-    return moment(date).format('YYYY-MM-DD HH:mm:ss')
+  return moment(date).format('YYYY-MM-DD HH:mm:ss')
 }
 
 exports.isStellarAccountId = function(value) {
-    return !!value.match(/^g[a-zA-Z0-9]{33}$/)
+  return !!value.match(/^g[a-zA-Z0-9]{33}$/)
 }
 
 exports.isTransactionHash = function(value) {
-    return !!value.match(/^[A-Z0-9]{64}$/)
+  return !!value.match(/^[A-Z0-9]{64}$/)
 }
 
 exports.isRippleAccountId = function(value) {
-    return !!value.match(/^r[a-zA-Z0-9]{33}$/)
+  return !!value.match(/^r[a-zA-Z0-9]{33}$/)
 }
