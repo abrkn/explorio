@@ -3,6 +3,7 @@ var React = require('react/addons')
 var remotes = require('../../../helpers/remotes')
 var formatters = require('../../../helpers/formatters')
 var constants = require('../../../helpers/constants')
+var AccountLink = require('../../../partials/stellar/account-link')
 
 var Info = React.createClass({
   getInitialState: function() {
@@ -33,7 +34,11 @@ var Info = React.createClass({
           <th>STR Balance</th>
           <td>{formatters.formatDrops(data.Balance, constants.networks.STELLAR)}</td>
         </tr>
-        </tbody>
+        <tr>
+          <th>Inflation destination</th>
+          <td>{data && data.InflationDest && <AccountLink id={data.InflationDest} />}</td>
+        </tr>
+      </tbody>
     </table>
   }
 })
