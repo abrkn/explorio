@@ -4,30 +4,28 @@ var remotes = require('../../../helpers/remotes')
 var constants = require('../../../helpers/constants')
 var transactionsHelper = require('../../../helpers/transactions')
 var AccountTransaction = require('./transaction')
-var LIMIT = 200
 
 var Transactions = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
 
   getInitialState: function() {
     return {
-      offset: 0,
       txs: [],
       more: null,
       accountFilter: '',
-      loading: false
+      loading: false,
+      marker: null
     }
   },
 
   fetch: function() {
     var remote = remotes[constants.networks.RIPPLE]
     var opts = {
-      ledger_index_min: -1,
       account: this.props.account,
+      ledger_index_min: -1,
       ledger_index_max: -1,
-      descending: true,
-      limit: LIMIT,
-      offset: this.state.offset || 0
+      forward: false,
+      marker: this.state.marker
     }
 
     this.setState({ loading: true })
@@ -41,9 +39,9 @@ var Transactions = React.createClass({
       .filter(transactionsHelper.successOnly)
 
       this.setState({
-        offset: this.state.offset + res.transactions.length,
+        marker: res.marker,
         txs: this.state.txs.concat(txs),
-        more: res.transactions.length == LIMIT
+        more: res.marker !== undefined
       })
     }.bind(this))
   },
@@ -81,7 +79,6 @@ var Transactions = React.createClass({
           {rows}
         </tbody>
       </table>
-    } else {
     }
 
     return <div className="account-transactions">
