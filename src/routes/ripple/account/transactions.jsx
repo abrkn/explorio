@@ -7,11 +7,14 @@ var AccountTransaction = require('./transaction')
 var LIMIT = 200
 
 var Transactions = React.createClass({
+  mixins: [React.addons.LinkedStateMixin],
+
   getInitialState: function() {
     return {
       offset: 0,
       txs: [],
-      more: null
+      more: null,
+      accountFilter: ''
     }
   },
 
@@ -28,7 +31,10 @@ var Transactions = React.createClass({
 
     remote.requestAccountTransactions(opts, function(err, res) {
       if (err) throw err
-      var txs = res.transactions.filter(transactionsHelper.successOnly)
+
+      var txs = res.transactions
+      .filter(transactionsHelper.successOnly)
+
       this.setState({
         offset: this.state.offset + res.transactions.length,
         txs: this.state.txs.concat(txs),
@@ -50,7 +56,18 @@ var Transactions = React.createClass({
     var txs
 
     if (this.state.txs) {
-      var rows = this.state.txs.map(function(tx) {
+      var filtered = this.state.txs
+
+      if (this.state.accountFilter) {
+        filtered = filtered.filter(function(x) {
+          if (!x.tx.Destination) return
+          var send = this.props.account == x.tx.Account
+          var other = send ? x.tx.Destination : x.tx.Account
+          return ~other.indexOf(this.state.accountFilter)
+        }.bind(this))
+      }
+
+      var rows = filtered.map(function(tx) {
         return <AccountTransaction key={tx.tx.hash} account={this.props.account} data={tx} />
       }.bind(this))
 
@@ -65,6 +82,12 @@ var Transactions = React.createClass({
 
     return <div className="account-transactions">
       <h2>Transactions</h2>
+        <div>
+          <div className="form-group">
+            <label htmlFor="accountFilter">Account filter</label>
+            <input name="accountFilter" type="text" valueLink={this.linkState('accountFilter')} className="form-control" />
+          </div>
+        </div>
         {txs}
         {this.state.more && <div className="btn-group btn-group-justified">
         <div className="btn-group">
