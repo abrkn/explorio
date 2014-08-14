@@ -23,6 +23,15 @@ var TransactionDescription = React.createClass({
           </span>
         } else if (tx.TransactionType == 'AccountSet') {
           inner = <span>Change account settings</span>
+        } else if (tx.TransactionType == 'OfferCreate') {
+          inner = <span>
+            Create offer to give{' '}
+            {formatters.formatAmount(tx.TakerGets, constants.networks.STELLAR)}
+            {' for '}
+            {formatters.formatAmount(tx.TakerPays, constants.networks.STELLAR)}
+          </span>
+        } else if (tx.TransactionType == 'OfferCancel') {
+          inner = <span>Cancel offer with sequence #{tx.OfferSequence}</span>
         } else {
           inner = <span>Unknown type: {tx.TransactionType}</span>
         }
