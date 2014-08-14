@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react/addons')
+var News = require('./news')
 
 var Home = React.createClass({
   render: function() {
@@ -28,6 +29,8 @@ var Home = React.createClass({
           </a>
         </div>
       </div>
+
+      <News />
     </div>
   }
 })
