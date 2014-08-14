@@ -14,7 +14,8 @@ var Transactions = React.createClass({
       offset: 0,
       txs: [],
       more: null,
-      accountFilter: ''
+      accountFilter: '',
+      loading: false
     }
   },
 
@@ -29,7 +30,11 @@ var Transactions = React.createClass({
       offset: this.state.offset || 0
     }
 
+    this.setState({ loading: true })
+
     remote.requestAccountTransactions(opts, function(err, res) {
+      this.setState({ loading: false })
+
       if (err) throw err
 
       var txs = res.transactions
@@ -77,11 +82,10 @@ var Transactions = React.createClass({
         </tbody>
       </table>
     } else {
-      txs = <p>Loading...</p>
     }
 
     return <div className="account-transactions">
-      <h2>Transactions</h2>
+      <h2>Transactions{this.state.loading ? '...' :''}</h2>
         <div>
           <div className="form-group">
             <label htmlFor="accountFilter">Account filter</label>
@@ -89,9 +93,11 @@ var Transactions = React.createClass({
           </div>
         </div>
         {txs}
-        {this.state.more && <div className="btn-group btn-group-justified">
+        {this.state.more && <div className="btn-group btn-group-justified" disabled={this.state.loading ? 'disabled' : ''}>
         <div className="btn-group">
-          <button disabled={this.state.loading ? 'disabled' : ''} type="button" className="btn btn-default" onClick={this.onClickMore}>More</button>
+          <button disabled={this.state.loading ? 'disabled' : ''} type="button" className="btn btn-default" onClick={this.onClickMore}>
+            More{this.state.loading ? '...' :''}
+          </button>
         </div>
       </div>}
     </div>
