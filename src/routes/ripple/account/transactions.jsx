@@ -4,12 +4,14 @@ var remotes = require('../../../helpers/remotes')
 var constants = require('../../../helpers/constants')
 var transactionsHelper = require('../../../helpers/transactions')
 var AccountTransaction = require('./transaction')
+var LIMIT = 200
 
 var Transactions = React.createClass({
   getInitialState: function() {
     return {
-      marker: null,
-      txs: []
+      offset: 0,
+      txs: [],
+      more: null
     }
   },
 
@@ -18,24 +20,29 @@ var Transactions = React.createClass({
     var opts = {
       ledger_index_min: -1,
       account: this.props.account,
-      descending: true
-    }
-
-    if (this.state.marker) {
-      opts.marker = marker
+      ledger_index_max: -1,
+      descending: true,
+      limit: LIMIT,
+      offset: this.state.offset || 0
     }
 
     remote.requestAccountTransactions(opts, function(err, res) {
       if (err) throw err
-        var txs = res.transactions.filter(transactionsHelper.successOnly)
+      var txs = res.transactions.filter(transactionsHelper.successOnly)
       this.setState({
-        marker: res.marker,
-        txs: this.state.txs.concat(txs)
+        offset: this.state.offset + res.transactions.length,
+        txs: this.state.txs.concat(txs),
+        more: res.transactions.length == LIMIT
       })
     }.bind(this))
   },
 
   componentWillMount: function() {
+    this.fetch()
+  },
+
+  onClickMore: function(e) {
+    e.preventDefault()
     this.fetch()
   },
 
@@ -58,7 +65,12 @@ var Transactions = React.createClass({
 
     return <div className="account-transactions">
       <h2>Transactions</h2>
-      {txs}
+        {txs}
+        {this.state.more && <div className="btn-group btn-group-justified">
+        <div className="btn-group">
+          <button disabled={this.state.loading ? 'disabled' : ''} type="button" className="btn btn-default" onClick={this.onClickMore}>More</button>
+        </div>
+      </div>}
     </div>
   }
 })
