@@ -2,6 +2,7 @@
 var React = require('react/addons')
 var formatters = require('../helpers/formatters')
 var cx = React.addons.classSet
+var stellarFederation = require('../helpers/stellar-federation')
 
 var DropdownButton = React.createClass({
   onClick: function(value, e) {
@@ -11,7 +12,9 @@ var DropdownButton = React.createClass({
 
   render: function() {
     return <div className="btn-group">
-      <button type="submit" className="btn">{this.props.value}</button>
+      <button type="submit" className="btn" disabled={this.props.disabled ? 'disabled': ''}>
+        {this.props.value}
+      </button>
       <button type="button" className="btn dropdown-toggle" data-toggle="dropdown">
         <span className="caret"></span>
         <span className="sr-only">Toggle Dropdown</span>
@@ -31,7 +34,8 @@ var Search = React.createClass({
     return {
       value: '',
       invalid: false,
-      network: 'Stellar'
+      network: 'Stellar',
+      loading: false
     }
   },
 
@@ -52,6 +56,15 @@ var Search = React.createClass({
         this.setState({ value: '' })
         return
       }
+
+      this.setState({ loading: true })
+
+      return stellarFederation.nameToAddress(this.state.value, true, function(err, res) {
+        this.setState({ loading: false })
+        if (err) throw err
+        if (res === null) return this.setState({ invalid: true })
+        window.location.hash = '#/stellar/accounts/' + res
+      }.bind(this))
     } else {
       if (formatters.isRippleAccountId(this.state.value)) {
         window.location.hash = '#/ripple/accounts/' + this.state.value
@@ -78,7 +91,7 @@ var Search = React.createClass({
       <div className={cx({ 'form-group': true, 'has-error': this.state.invalid })}>
         <input type="text" className="form-control" valueLink={this.linkState('value')} />
       </div>
-      <DropdownButton value={this.state.network} onChange={this.onNetworkChange} />
+      <DropdownButton value={this.state.network} onChange={this.onNetworkChange} disabled={this.state.loading} />
     </form>
   }
 })
