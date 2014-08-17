@@ -4,6 +4,7 @@ var remotes = require('../../../helpers/remotes')
 var formatters = require('../../../helpers/formatters')
 var constants = require('../../../helpers/constants')
 var AccountLink = require('../../../partials/stellar/account-link')
+var stellarFederation = require('../../../helpers/stellar-federation')
 
 var Info = React.createClass({
   getInitialState: function() {
@@ -19,6 +20,11 @@ var Info = React.createClass({
       if (err) throw err
         this.setState({ info: info })
     }.bind(this))
+
+    stellarFederation.addressToName(this.props.account, true, function(err, username) {
+      if (err) throw err
+      this.setState({ username: username })
+    }.bind(this))
   },
 
   render: function() {
@@ -30,6 +36,14 @@ var Info = React.createClass({
 
     return <table className="table table-bordered table-striped">
       <tbody>
+        <tr>
+          <th>Username</th>
+          <td>
+            {this.state.username === undefined && '...'}
+            {this.state.username === null && 'None assigned'}
+            {typeof this.state.username == 'string' && this.state.username}
+          </td>
+        </tr>
         <tr>
           <th>STR Balance</th>
           <td>{formatters.formatDrops(data.Balance, constants.networks.STELLAR)}</td>
