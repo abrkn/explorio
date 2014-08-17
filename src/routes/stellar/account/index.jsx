@@ -18,10 +18,12 @@ var Account = React.createClass({
   },
 
   render: function() {
+    var account = this.props.params.account
+
     return <div className="container">
-      <h1>{this.props.params.account}</h1>
-      <AccountInfo account={this.props.params.account} />
-      <AccountTransactions account={this.props.params.account} />
+      <h1 title={account}>{account.substr(0, 7)} <CopyButton clipboard={account} /></h1>
+      <AccountInfo account={account} />
+      <AccountTransactions account={account} />
     </div>
   }
 })
