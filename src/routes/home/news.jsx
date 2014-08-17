@@ -6,6 +6,16 @@ var News = React.createClass({
     return <div className="news">
       <h2>News</h2>
 
+      <h3>Aug 17th</h3>
+      <ul>
+        <li>
+          You can now search Stellar usernames. Try searching for <strong>abrkn</strong> or <strong>justcoin</strong> or <strong>StellarFounderation</strong>
+        </li>
+        <li>
+          Stellar account page now shows username.
+        </li>
+      </ul>
+
       <h3>Aug 14th</h3>
       <ul>
         <li>
