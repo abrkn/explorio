@@ -26,7 +26,7 @@ exports.date = function(date) {
 }
 
 exports.isStellarAccountId = function(value) {
-  return !!value.match(/^g[a-zA-Z0-9]{33}$/)
+  return !!value.match(/^g[a-zA-Z0-9]{32,33}$/)
 }
 
 exports.isTransactionHash = function(value) {
@@ -34,5 +34,5 @@ exports.isTransactionHash = function(value) {
 }
 
 exports.isRippleAccountId = function(value) {
-  return !!value.match(/^r[a-zA-Z0-9]{33}$/)
+  return !!value.match(/^r[a-zA-Z0-9]{32,33}$/)
 }
