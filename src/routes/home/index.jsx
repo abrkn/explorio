@@ -1,8 +1,13 @@
 /** @jsx React.DOM */
 var React = require('react/addons')
 var News = require('./news')
+var config = require('json!../../config.json')
 
 var Home = React.createClass({
+  componentWillMount: function() {
+    document.title = document.originalTitle
+  },
+
   render: function() {
     return <div className="home-page container">
       <h1>Welcome to Explorio!</h1>

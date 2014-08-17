@@ -9,6 +9,7 @@ var transactionsHelper = require('../../../helpers/transactions')
 var TransactionDescription = require('../../../partials/ripple/transaction-description')
 var CopyButton = require('../../../partials/copy-button')
 var AccountLink = require('../../../partials/ripple/account-link')
+var config = require('json!../../../config.json')
 
 var Transaction = React.createClass({
   getInitialState: function() {
@@ -28,6 +29,7 @@ var Transaction = React.createClass({
   },
 
   componentWillMount: function() {
+    document.title = this.props.params.hash + config.documentTitleSuffix
     this.fetch()
   },
 

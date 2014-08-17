@@ -6,6 +6,7 @@ var numbers = require('../../../helpers/numbers')
 var constants = require('../../../helpers/constants')
 var formatters = require('../../../helpers/formatters')
 var CopyButton = require('../../../partials/copy-button')
+var config = require('json!../../../config.json')
 
 var ServerInfo = React.createClass({
   getInitialState: function() {
@@ -13,6 +14,8 @@ var ServerInfo = React.createClass({
   },
 
   componentWillMount: function() {
+    document.title = 'Ripple' + config.documentTitleSuffix
+
     var remote = remotes[constants.networks.RIPPLE]
     remote.requestServerInfo(function(err, res) {
       if (err) throw err

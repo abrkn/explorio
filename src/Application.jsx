@@ -9,6 +9,7 @@ var Footer = require('./partials/footer')
 var constants = require('./helpers/constants')
 
 window.Remotes = require('./helpers/remotes')
+document.originalTitle = document.title
 
 // Expose React to React debugger
 window.React = React

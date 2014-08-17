@@ -10,8 +10,13 @@ var TransactionDescription = require('../../../partials/stellar/transaction-desc
 var CopyButton = require('../../../partials/copy-button')
 var AccountInfo = require('./info')
 var AccountTransactions = require('./transactions')
+var config = require('json!../../../config.json')
 
 var Account = React.createClass({
+  componentWillMount: function() {
+    document.title = this.props.params.account + config.documentTitleSuffix
+  },
+
   render: function() {
     return <div className="container">
       <h1>{this.props.params.account}</h1>
