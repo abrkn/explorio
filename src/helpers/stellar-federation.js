@@ -41,6 +41,26 @@ exports.addressToName = function(addr, fetch, cb) {
     cb(null, value)
   })
 }
+
+exports.nameToAddress = function(username, fetch, cb) {
+  var key = prefix + username + '@' + domain
+  var value = store(key)
+
+  if (value !== undefined) {
+    cb && cb(null, value)
+    return value
+  }
+
+  if (!fetch) {
+    cb && cb()
+    return
+  }
+
+  var url = format(config.federation, username, domain)
+  request.get(url, function(err, res) {
+    if (err) return cb(err)
+    value = res.notFound ? null : res.body.federation_json.destination_address
+    store(key, value)
     cb(null, value)
   })
 }
