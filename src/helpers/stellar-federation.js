@@ -8,9 +8,20 @@ if (!window.localStorage) {
   throw new Error('Local storage not supported')
 }
 
+function store(key, val) {
+  if (val !== undefined) {
+    window.localStorage[key] = val === null ? '' : val
+    return val
+  }
+  val = window.localStorage[key]
+  // HACK: Fix improperly stored values
+  if (val === 'null') return null
+  return val === '' ? null : val
+}
+
 exports.addressToName = function(addr, fetch, cb) {
   var key = prefix + addr + '@' + domain
-  var value = window.localStorage[key]
+  var value = store(key)
 
   if (value !== undefined) {
     cb && cb(null, value)
@@ -26,7 +37,10 @@ exports.addressToName = function(addr, fetch, cb) {
   request.get(url, function(err, res) {
     if (err) return cb(err)
     value = res.notFound ? null : res.body.federation_json.destination
-    window.localStorage[key] = value
+    store(key, value)
+    cb(null, value)
+  })
+}
     cb(null, value)
   })
 }
