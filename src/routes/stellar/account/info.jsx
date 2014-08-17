@@ -9,17 +9,22 @@ var stellarFederation = require('../../../helpers/stellar-federation')
 var Info = React.createClass({
   getInitialState: function() {
     return {
-      info: null
+      info: null,
+      error: null,
+      loading: false
     }
   },
 
   componentWillMount: function() {
+    this.fetch()
+  },
+
+  fetch: function() {
+    this.setState({ loading: true })
+
     var remote = remotes[constants.networks.STELLAR]
 
-    remote.requestAccountInfo(this.props.account, function(err, info) {
-      if (err) throw err
-        this.setState({ info: info })
-    }.bind(this))
+    remote.requestAccountInfo(this.props.account, this.fetchedInfo)
 
     stellarFederation.addressToName(this.props.account, true, function(err, username) {
       if (err) throw err
@@ -27,9 +32,30 @@ var Info = React.createClass({
     }.bind(this))
   },
 
+  fetchedInfo: function(err, info) {
+    if (!this.isMounted()) return
+
+    if (err) {
+      this.setState({
+        error: formatters.formatRemoteResponseError(err),
+        loading: false
+      })
+      return
+    }
+
+    this.setState({
+      info: info,
+      loading: false
+    })
+  },
+
   render: function() {
-    if (!this.state.info) {
+    if (this.state.loading) {
       return <p>Loading...</p>
+    }
+
+    if (this.state.error) {
+      return <div className="alert alert-danger">{this.state.error}</div>
     }
 
     var data = this.state.info.account_data

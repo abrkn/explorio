@@ -36,3 +36,7 @@ exports.isTransactionHash = function(value) {
 exports.isRippleAccountId = function(value) {
   return !!value.match(/^r[a-zA-Z0-9]{32,33}$/)
 }
+
+exports.formatRemoteResponseError = function(err) {
+  return (err.remote && err.remote.error_message) || err.error_message || err.message || err.toString()
+}
