@@ -9,6 +9,9 @@ var News = React.createClass({
       <h3>Aug 17th</h3>
       <ul>
         <li>
+          Add support for viewing Stellar ledgers, like <a href="#/stellar/ledgers/376610">#376610</a>
+        </li>
+        <li>
           You can now search Stellar usernames. Try searching for <strong>abrkn</strong> or <strong>justcoin</strong> or <strong>StellarFounderation</strong>
         </li>
         <li>

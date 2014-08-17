@@ -30,6 +30,7 @@ var HomeRoute = require('./routes/home')
 var StellarHomeRoute = require('./routes/stellar/home')
 var StellarAccountRoute = require('./routes/stellar/account')
 var StellarTransactionRoute = require('./routes/stellar/transaction')
+var StellarLedgerRoute = require('./routes/stellar/ledger')
 var RippleHomeRoute = require('./routes/ripple/home')
 var RippleAccountRoute = require('./routes/ripple/account')
 var RippleTransactionRoute = require('./routes/ripple/transaction')
@@ -41,6 +42,7 @@ var routes = (
       <Route name="stellarHome" path="/stellar" handler={StellarHomeRoute} />
       <Route name="stellarAccount" path="/stellar/accounts/:account" handler={StellarAccountRoute} />
       <Route name="stellarTransaction" path="/stellar/transactions/:hash" handler={StellarTransactionRoute} />
+      <Route name="stellarLedger" path="/stellar/ledgers/:ledger" handler={StellarLedgerRoute} />
       <Route name="rippleHome" path="/ripple" handler={RippleHomeRoute} />
       <Route name="rippleAccount" path="/ripple/accounts/:account" handler={RippleAccountRoute} />
       <Route name="rippleTransaction" path="/ripple/transactions/:hash" handler={RippleTransactionRoute} />

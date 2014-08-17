@@ -9,6 +9,7 @@ var transactionsHelper = require('../../../helpers/transactions')
 var TransactionDescription = require('../../../partials/stellar/transaction-description')
 var CopyButton = require('../../../partials/copy-button')
 var AccountLink = require('../../../partials/stellar/account-link')
+var LedgerLink = require('../../../partials/stellar/ledger-link')
 var config = require('json!../../../config.json')
 
 var Transaction = React.createClass({
@@ -52,7 +53,7 @@ var Transaction = React.createClass({
           </tr>
           <tr>
             <th>Ledger</th>
-            <td>{tx && tx.inLedger}</td>
+            <td>{tx && <LedgerLink index={tx.inLedger} />}</td>
           </tr>
           <tr>
             <th>Fee</th>
