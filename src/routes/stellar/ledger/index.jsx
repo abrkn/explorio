@@ -24,11 +24,19 @@ var LedgerPage = React.createClass({
     this.fetch()
   },
 
+  ledgerIsIndex: function() {
+    return this.props.params.ledger.length != 64
+  },
+
+  ledgerTyped: function() {
+    if (this.ledgerIsIndex()) return parseInt(this.props.params.ledger)
+    return this.props.params.ledger
+  },
+
   fetch: function() {
     var remote = remotes[constants.networks.STELLAR]
-    var ledger = parseInt(this.props.params.ledger) || this.props.params.ledger
     this.setState({ loading: true })
-    remote.requestLedger(ledger, { transactions: true }, this.fetched)
+    remote.requestLedger(this.ledgerTyped(), { transactions: true }, this.fetched)
   },
 
   fetched: function(err, res) {
@@ -48,7 +56,7 @@ var LedgerPage = React.createClass({
   },
 
   render: function() {
-    var ledger = parseInt(this.props.params.ledger) || this.props.params.ledger
+    var ledger = this.ledgerTyped()
     var inner
 
     if (this.state.loading) {
