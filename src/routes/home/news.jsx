@@ -6,6 +6,13 @@ var News = React.createClass({
     return <div className="news">
       <h2>News</h2>
 
+      <h3>Aug 18th</h3>
+      <ul>
+        <li>
+          Added server status (bottom right corner of page)
+        </li>
+      </ul>
+
       <h3>Aug 17th</h3>
       <ul>
         <li>
