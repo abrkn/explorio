@@ -16,6 +16,11 @@ var Home = React.createClass({
         Explorio lets you browse the ledger of Ripple and Stellar.
       </p>
 
+      <div className="well">
+        <p className="lead">Please vote for us to win the 5000 STR in the developer bounty</p>
+        <a className="btn btn-success btn-xl" target="_blank" href="https://stellartalk.org/topic/3918-who-should-the-5000-str-dice-dev-bounty-go-to/">Vote for Explor.io now!</a>
+      </div>
+
       <div className="row">
         <div className="col-xs-2">
           <a href="#/ripple" className="thumbnail">
