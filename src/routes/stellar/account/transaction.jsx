@@ -9,6 +9,8 @@ var Transaction = React.createClass({
   render: function() {
     var outer = this.props.data
     var inner = outer.tx
+    var other = this.props.account == inner.Account ? inner.Destination : inner.Account
+    var dt = inner.DestinationTag !== undefined ? '?dt=' + inner.DestinationTag : ''
 
     return <tr className="transaction">
       <td>
@@ -19,6 +21,9 @@ var Transaction = React.createClass({
       </td>
       <td>
         <TransactionDescription perspective={this.props.account} tx={inner} />
+      </td>
+      <td>
+        {dt && <a href={'#/stellar/accounts/' + other + dt} title="More transactions with the same destination tag">More like this</a>}
       </td>
     </tr>
   }

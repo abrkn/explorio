@@ -4,15 +4,19 @@ var remotes = require('../../../helpers/remotes')
 var constants = require('../../../helpers/constants')
 var transactionsHelper = require('../../../helpers/transactions')
 var AccountTransaction = require('./transaction')
+var parseHashQs = require('../../../helpers/parse-hash-qs')
 
 var Transactions = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
 
   getInitialState: function() {
+    var opts = parseHashQs()
+
     return {
       txs: [],
       more: null,
       accountFilter: '',
+      dtFilter: opts.dt !== undefined ? opts.dt : '',
       loading: false,
       marker: null
     }
@@ -70,6 +74,12 @@ var Transactions = React.createClass({
         }.bind(this))
       }
 
+      if (this.state.dtFilter) {
+        filtered = filtered.filter(function(x) {
+          return x.tx.DestinationTag === parseInt(this.state.dtFilter)
+        }.bind(this))
+      }
+
       var rows = filtered.map(function(tx) {
         return <AccountTransaction key={tx.tx.hash} account={this.props.account} data={tx} />
       }.bind(this))
@@ -83,12 +93,16 @@ var Transactions = React.createClass({
 
     return <div className="account-transactions">
       <h2>Transactions{this.state.loading ? '...' :''}</h2>
-      <div>
+      <form className="form-inline">
         <div className="form-group">
           <label htmlFor="accountFilter">Account filter</label>
           <input name="accountFilter" type="text" valueLink={this.linkState('accountFilter')} className="form-control" />
         </div>
-      </div>
+        <div className="form-group">
+          <label htmlFor="dtFilter"><abbr title="Destination Tag">DT</abbr> filter</label>
+          <input name="dtFilter" type="text" valueLink={this.linkState('dtFilter')} className="form-control" />
+        </div>
+      </form>
       {txs}
       {this.state.more && <div className="btn-group btn-group-justified">
         <div className="btn-group">
