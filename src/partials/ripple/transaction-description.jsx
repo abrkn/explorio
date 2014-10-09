@@ -15,7 +15,7 @@ var TransactionDescription = React.createClass({
         var other = send ? tx.Destination : tx.Account
           inner = <span>
             {send ? 'Sent' : 'Received'}{' '}
-            {formatters.formatAmount(tx.Amount, constants.networks.RIPPLE)}{' '}
+            {formatters.formatAmount(tx.SendMax || tx.Amount, constants.networks.RIPPLE)}{' '}
             {send ? 'to' : ' from'}{' '}
             <AccountLink id={other} />
             {tx.DestinationTag ? ':' + tx.DestinationTag : ''}

@@ -83,6 +83,10 @@ var Transaction = React.createClass({
             <th>Amount</th>
             <td>{formatters.formatAmount(tx.Amount, constants.networks.STELLAR)}</td>
           </tr>}
+          {tx && tx.meta.DeliveredAmount && <tr>
+            <th>Delivered Amount</th>
+            <td>{formatters.formatAmount(tx.meta.DeliveredAmount, constants.networks.RIPPLE)}</td>
+          </tr>}
           {tx && tx.Flags !== undefined && <tr>
             <th>Flags</th>
             <td>{tx.Flags}</td>

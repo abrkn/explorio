@@ -37,6 +37,8 @@ var Transaction = React.createClass({
     var hash = this.props.params.hash
     var tx = this.state.tx
 
+    console.log(tx)
+
     return <div className="container">
       <h1 title={hash}>{hash.substr(0, 7)} <CopyButton clipboard={hash} /></h1>
 
@@ -81,6 +83,10 @@ var Transaction = React.createClass({
           {tx && tx.Amount && <tr>
             <th>Amount</th>
             <td>{formatters.formatAmount(tx.Amount, constants.networks.RIPPLE)}</td>
+          </tr>}
+          {tx && tx.meta.DeliveredAmount && <tr>
+            <th>Delivered Amount</th>
+            <td>{formatters.formatAmount(tx.meta.DeliveredAmount, constants.networks.RIPPLE)}</td>
           </tr>}
           {tx && tx.Flags !== undefined && <tr>
             <th>Flags</th>
