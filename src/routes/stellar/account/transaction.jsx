@@ -20,7 +20,7 @@ var Transaction = React.createClass({
         {formatters.date(formatters.networkEpochToDate(constants.networks.STELLAR, inner.date))}
       </td>
       <td>
-        <TransactionDescription perspective={this.props.account} tx={inner} />
+        <TransactionDescription perspective={this.props.account} tx={outer} />
       </td>
       <td>
         {dt && <a href={'#/stellar/accounts/' + other + dt} title="More transactions with the same destination tag">More like this</a>}

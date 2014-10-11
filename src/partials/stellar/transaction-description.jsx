@@ -8,32 +8,33 @@ var TransactionDescription = React.createClass({
   render: function() {
     var inner
     var tx = this.props.tx
+    var innerTx = tx.tx
 
     if (this.props.perspective) {
-      if (tx.TransactionType == 'Payment') {
-        var send = this.props.tx.Account == this.props.perspective
-        var other = send ? tx.Destination : tx.Account
+      if (innerTx.TransactionType == 'Payment') {
+        var send = innerTx.Account == this.props.perspective
+        var other = send ? innerTx.Destination : innerTx.Account
           inner = <span>
             {send ? 'Sent' : 'Received'}{' '}
-            {formatters.formatAmount(tx.SendMax || tx.Amount, constants.networks.STELLAR)}{' '}
+            {formatters.formatAmount(tx.meta.DeliveredAmount || innerTx.Amount, constants.networks.STELLAR)}{' '}
             {send ? 'to' : ' from'}{' '}
             <AccountLink id={other} />
-            {tx.DestinationTag ? ':' + tx.DestinationTag : ''}
+            {innerTx.DestinationTag ? ':' + innerTx.DestinationTag : ''}
 
           </span>
-        } else if (tx.TransactionType == 'AccountSet') {
+        } else if (innerTx.TransactionType == 'AccountSet') {
           inner = <span>Change account settings</span>
-        } else if (tx.TransactionType == 'OfferCreate') {
+        } else if (innerTx.TransactionType == 'OfferCreate') {
           inner = <span>
             Create offer to give{' '}
-            {formatters.formatAmount(tx.TakerGets, constants.networks.STELLAR)}
+            {formatters.formatAmount(innerTx.TakerGets, constants.networks.STELLAR)}
             {' for '}
-            {formatters.formatAmount(tx.TakerPays, constants.networks.STELLAR)}
+            {formatters.formatAmount(innerTx.TakerPays, constants.networks.STELLAR)}
           </span>
-        } else if (tx.TransactionType == 'OfferCancel') {
-          inner = <span>Cancel offer with sequence #{tx.OfferSequence}</span>
+        } else if (innerTx.TransactionType == 'OfferCancel') {
+          inner = <span>Cancel offer with sequence #{innerTx.OfferSequence}</span>
         } else {
-          inner = <span>Unknown type: {tx.TransactionType}</span>
+          inner = <span>Unknown type: {innerTx.TransactionType}</span>
         }
     } else {
       throw new Error('Not implemented')
