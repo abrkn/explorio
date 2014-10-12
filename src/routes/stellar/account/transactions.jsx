@@ -63,7 +63,9 @@ var Transactions = React.createClass({
     var txs
 
     if (this.state.txs) {
-      var filtered = this.state.txs
+      var filtered = this.state.txs.filter(function(x) {
+          return ~[x.tx.Account, x.tx.Destination].indexOf(this.props.account)
+      }.bind(this))
 
       if (this.state.accountFilter) {
         filtered = filtered.filter(function(x) {
