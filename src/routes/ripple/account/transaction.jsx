@@ -18,7 +18,7 @@ var Transaction = React.createClass({
         {formatters.date(formatters.networkEpochToDate(constants.networks.RIPPLE, inner.date))}
       </td>
       <td>
-        <TransactionDescription perspective={this.props.account} tx={inner} />
+        <TransactionDescription perspective={this.props.account} tx={outer} />
       </td>
     </tr>
   }
