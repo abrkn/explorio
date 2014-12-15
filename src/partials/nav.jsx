@@ -17,7 +17,7 @@ var Nav = React.createClass({
             <img className="logo" src="https://s3-eu-west-1.amazonaws.com/explor.io/images/explorio.svg" alt="Explor.io" />
           </a>
           <p className="navbar-text">
-            Sponsored by <a href="https://justcoin.com/stellar?utm_source=explorio&amp;utm_medium=link&amp;utm_campaign=product" className="navbar-link">Justcoin Exchange</a>
+            Your ad here? <a href="mailto:a+explorio@abrkn.com">Contact us</a>
           </p>
         </div>
         <div className="navbar-collapse collapse">
